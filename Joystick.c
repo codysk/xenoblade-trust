@@ -31,6 +31,8 @@ typedef enum {
 	B,
 	L,
 	R,
+	ZL,
+	ZR,
 	THROW,
 	NOTHING,
 	TRIGGERS,
@@ -67,14 +69,15 @@ static const command step[] = {
 	{B, 5},		{NOTHING, 150}, 	// Returned
 	{PLUS, 5},	{NOTHING, 150}, 	// Open menu
 	{A, 5},		{NOTHING, 50},
+	{ZR, 5},         {NOTHING, 30},
 	{A, 5},		{NOTHING, 30},		// Select First character
 	
 	// Select and enter bag
 	{LEFT, 5},	{NOTHING, 20},
 	{A, 5},		{NOTHING, 15},
 
-	// Consume item 20 times
-	{REPEATSTART, 20},
+	// Consume item 10 times
+	{REPEATSTART, 10},
 	{A, 5},{NOTHING, 15},{A, 5},{NOTHING, 15},{A, 5},{NOTHING, 10},{A, 5},{NOTHING, 10},{A, 5},{NOTHING, 80}, // Consume an item
 	{REPEATEND, 0},
 
@@ -296,6 +299,18 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 
 				case R:
 					ReportData->Button |= SWITCH_R;
+					break;
+
+				case ZR:
+					ReportData->Button |= SWITCH_ZR;
+					break;
+
+				case L:
+					ReportData->Button |= SWITCH_L;
+					break;
+
+				case ZL:
+					ReportData->Button |= SWITCH_ZL;
 					break;
 
 				case THROW:
